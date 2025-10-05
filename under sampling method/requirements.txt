@@ -3,5 +3,5 @@ scikit-learn
 pandas
 numpy
 joblib
-matplotlib   # if used
-requests     # if you download model at runtime
+matplotlib
+requests
