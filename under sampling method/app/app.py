@@ -1,8 +1,16 @@
 import streamlit as st
 import numpy as np
-import joblib
 import os
 from pathlib import Path
+try:
+    import joblib
+except ModuleNotFoundError:
+    try:
+        # older scikit-learn sometimes had externals.joblib (backwards compatibility)
+        from sklearn.externals import joblib  # fallback
+    except Exception:
+        raise RuntimeError("joblib is not installed. Ensure requirements.txt contains 'joblib' and redeploy.")
+
 
 # Page configuration
 st.set_page_config(page_title="Automobile Loan Default Prediction", page_icon="🚗", layout="wide")
