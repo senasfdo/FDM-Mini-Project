@@ -1,12 +1,35 @@
 import streamlit as st
 import numpy as np
 import joblib
+import os
+from pathlib import Path
 
 # Page configuration
 st.set_page_config(page_title="Automobile Loan Default Prediction", page_icon="🚗", layout="wide")
 
 # Load the trained model (unchanged)
-model = joblib.load('models/rf_model_weighted.pkl')
+# --- LOAD MODEL ---
+MODEL_PATH = Path(__file__).parent.parent / "models" / "rf_model_weighted.pkl"
+
+
+@st.cache_resource
+def load_model():
+    """Load model from local path. Show error if missing."""
+    if not MODEL_PATH.exists():
+        st.error(
+            f"Model file not found at {MODEL_PATH}.\n"
+            "Please make sure 'rf_model_weighted.pkl' is in the 'model' folder."
+        )
+        st.stop()  # Stop the app if model is missing
+    return joblib.load(MODEL_PATH)
+
+
+# Load model
+try:
+    model = load_model()
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+    st.stop()
 
 # --- Highly polished UI CSS & Fonts (only styling; prediction logic unchanged) ---
 st.markdown(
