@@ -1,0 +1,7 @@
+streamlit>=1.20
+scikit-learn
+pandas
+numpy
+joblib
+matplotlib   # if used
+requests     # if you download model at runtime
