@@ -9,10 +9,8 @@ import joblib
 st.set_page_config(page_title="Automobile Loan Default Prediction", page_icon="🚗", layout="wide")
 
 # Load the trained model (unchanged)
-# --- LOAD MODEL ---
 MODEL_PATH = Path(__file__).parent.parent / "models" / "rf_model_weighted.pkl"
 
-# Load model safely
 model = joblib.load(MODEL_PATH)
 
 # --- Highly polished UI CSS & Fonts (only styling; prediction logic unchanged) ---
